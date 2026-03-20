@@ -54,7 +54,7 @@
             background: linear-gradient(135deg, #ffeef7, #ffd9f0);
         }
 
-        /* Стили для пончика - В ЦЕНТРЕ */
+        /* Стили для пончика - В ЦЕНТРЕ, на месте */
         .ponchik {
             position: absolute;
             top: 50%;
@@ -69,11 +69,11 @@
             transition: rotate 0.3s ease-out;
         }
 
-        /* Стеклянная плашка СЛЕВА, во всю длину */
+        /* Стеклянная плашка СЛЕВА, ДО ПОЛОВИНЫ ЭКРАНА */
         .glass {
             height: 100vh;
-            width: clamp(300px, 42vw, 480px);
-            padding: 60px 40px;
+            width: clamp(50vw, 55vw, 60vw); /* До половины экрана и больше */
+            padding: 60px 50px;
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -116,7 +116,7 @@
     <div class="page-wrapper">
         <!-- Экран 1 -->
         <section class="section section-1">
-            <!-- Стеклянная плашка СЛЕВА -->
+            <!-- Большая плашка СЛЕВА, до половины экрана -->
             <div class="glass">
                 <h1 class="glass-title">Соня</h1>
                 <p>
@@ -126,10 +126,9 @@
                 </p>
             </div>
             
-            <!-- Пончик В ЦЕНТРЕ -->
+            <!-- Пончик В ЦЕНТРЕ, стоит на месте -->
             <img src="пончик 2.png" alt="Пончик" class="ponchik" id="ponchik">
 
-            <!-- Подсказка листания ВЕРНУТА -->
             <div class="scroll-hint">Листай вниз колёсиком</div>
         </section>
 
@@ -155,7 +154,7 @@
     </div>
 
     <script>
-        // Скролл по колёсику (ВСЕГДА работает)
+        // Скролл по колёсику
         (function () {
             const wrapper = document.querySelector('.page-wrapper');
             const sections = Array.from(document.querySelectorAll('.section'));
