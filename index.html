@@ -53,22 +53,7 @@
         .section-3 {
             background: linear-gradient(135deg, #ffeef7, #ffd9f0);
         }
-
-        /* Пончик В ЦЕНТРЕ */
-        .ponchik {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: clamp(350px, 55vw, 650px);
-            height: clamp(350px, 55vw, 650px);
-            object-fit: cover;
-            border-radius: 50%;
-            z-index: 2;
-            filter: drop-shadow(0 30px 60px rgba(255, 182, 224, 0.6));
-            transition: rotate 0.3s ease-out;
-        }
-
+        
         /* Плашка перекрывает ПОЛНУЮ ЛЕВУЮ половину пончика */
         .glass {
             height: 100vh;
@@ -110,6 +95,21 @@
             opacity: 0.8;
             z-index: 3;
         }
+        /* Пончик В ЦЕНТРЕ */
+        .ponchik {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(350px, 55vw, 650px);
+            height: clamp(350px, 55vw, 650px);
+            object-fit: cover;
+            border-radius: 50%;
+            z-index: 2;
+            filter: drop-shadow(0 30px 60px rgba(255, 182, 224, 0.6));
+            transition: rotate 0.3s ease-out;
+        }
+
     </style>
 </head>
 <body>
