@@ -54,7 +54,7 @@
             background: linear-gradient(135deg, #ffeef7, #ffd9f0);
         }
 
-        /* Стили для пончика - В ЦЕНТРЕ, на месте */
+        /* Пончик В ЦЕНТРЕ */
         .ponchik {
             position: absolute;
             top: 50%;
@@ -69,10 +69,10 @@
             transition: rotate 0.3s ease-out;
         }
 
-        /* Стеклянная плашка СЛЕВА, ДО ПОЛОВИНЫ ЭКРАНА */
+        /* Плашка перекрывает ПОЛНУЮ ЛЕВУЮ половину пончика */
         .glass {
             height: 100vh;
-            width: clamp(50vw, 55vw, 60vw); /* До половины экрана и больше */
+            width: 65vw; /* Шире центра - перекрывает левую половину пончика */
             padding: 60px 50px;
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
@@ -84,7 +84,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 1;
+            z-index: 1; /* Под пончиком */
             font-size: clamp(16px, 2vw, 18px);
             line-height: 1.6;
             display: flex;
@@ -116,7 +116,7 @@
     <div class="page-wrapper">
         <!-- Экран 1 -->
         <section class="section section-1">
-            <!-- Большая плашка СЛЕВА, до половины экрана -->
+            <!-- Плашка перекрывает ЛЕВУЮ половину пончика -->
             <div class="glass">
                 <h1 class="glass-title">Соня</h1>
                 <p>
@@ -126,7 +126,7 @@
                 </p>
             </div>
             
-            <!-- Пончик В ЦЕНТРЕ, стоит на месте -->
+            <!-- Пончик В ЦЕНТРЕ, ПРАВАЯ часть видна -->
             <img src="пончик 2.png" alt="Пончик" class="ponchik" id="ponchik">
 
             <div class="scroll-hint">Листай вниз колёсиком</div>
