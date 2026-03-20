@@ -54,20 +54,48 @@
             background: linear-gradient(135deg, #ffeef7, #ffd9f0);
         }
 
-        .content {
-            max-width: 800px;
+        /* Стили для пончика - БОЛЬШЕ */
+        .ponchik {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(350px, 55vw, 650px);
+            height: clamp(350px, 55vw, 650px);
+            object-fit: cover;
+            border-radius: 50%;
+            z-index: 1;
+            filter: drop-shadow(0 30px 60px rgba(255, 182, 224, 0.6));
+            transition: rotate 0.3s ease-out;
+        }
+
+        /* Стеклянная плашка СПРАВА, закрывает половину пончика */
+        .glass {
+            height: clamp(320px, 50vh, 400px);
+            width: clamp(320px, 50vw, 500px);
+            padding: 35px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+            color: #4a2b3c;
             text-align: center;
+            position: absolute;
+            top: 50%;
+            right: 8%; /* Сдвинута вправо */
+            transform: translateY(-50%);
+            z-index: 2;
+            font-size: clamp(16px, 2.2vw, 19px);
+            line-height: 1.6;
         }
 
-        .title {
-            font-size: clamp(32px, 5vw, 48px);
-            margin-bottom: 16px;
-        }
-
-        .subtitle {
-            font-size: clamp(16px, 2.4vw, 20px);
-            line-height: 1.5;
-            opacity: 0.9;
+        .glass-title {
+            font-size: clamp(26px, 4.5vw, 38px);
+            font-weight: 600;
+            margin-bottom: 22px;
+            color: #3a1f2b;
         }
 
         .scroll-hint {
@@ -79,27 +107,7 @@
             letter-spacing: 0.08em;
             text-transform: uppercase;
             opacity: 0.8;
-        }
-
-        /* Стили для пончика */
-        .ponchik {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: clamp(200px, 35vw, 400px);
-            height: clamp(200px, 35vw, 400px);
-            object-fit: cover;
-            border-radius: 50%;
-            z-index: 1;
-            filter: drop-shadow(0 20px 40px rgba(255, 182, 224, 0.5));
-            transition: rotate 0.3s ease-out;
-        }
-
-        /* Текст поверх пончика */
-        .content {
-            position: relative;
-            z-index: 2;
+            z-index: 3;
         }
     </style>
 </head>
@@ -107,23 +115,27 @@
     <div class="page-wrapper">
         <!-- Экран 1 -->
         <section class="section section-1">
-            <!-- Пончик в центре, крутится за мышкой -->
+            <!-- Большой пончик в центре, крутится за мышкой -->
             <img src="пончик 2.png" alt="Пончик" class="ponchik" id="ponchik">
             
-            <div class="content">
-                <h1 class="title">Привет! Это первый экран</h1>
-                <p class="subtitle">
-                    Здесь информация о себе. Пончик крутится в след за мышкой, но всегда в центре!
+            <!-- Стеклянная плашка СПРАВА, закрывает половину пончика -->
+            <div class="glass">
+                <h1 class="glass-title">Соня</h1>
+                <p>
+                    Я Соня — дизайнер, который превращает идеи в красивые и функциональные цифровые продукты. 
+                    Создаю сайты, логотипы и другие элементы визуальной коммуникации, которые помогают бизнесу 
+                    привлекать клиентов и увеличивать продажи.
                 </p>
             </div>
-          
+
+            <div class="scroll-hint">Листай вниз колёсиком</div>
         </section>
 
         <!-- Экран 2 -->
         <section class="section section-2">
-            <div class="content">
-                <h2 class="title">Второй экран</h2>
-                <p class="subtitle">
+            <div style="max-width: 800px; text-align: center;">
+                <h2 style="font-size: clamp(32px, 5vw, 48px); margin-bottom: 16px;">Второй экран</h2>
+                <p style="font-size: clamp(16px, 2.4vw, 20px); line-height: 1.5; opacity: 0.9;">
                     Тут можно разместить постеры, работы, фотографии или описание услуг.
                 </p>
             </div>
@@ -131,9 +143,9 @@
 
         <!-- Экран 3 -->
         <section class="section section-3">
-            <div class="content">
-                <h2 class="title">Третий экран</h2>
-                <p class="subtitle">
+            <div style="max-width: 800px; text-align: center;">
+                <h2 style="font-size: clamp(32px, 5vw, 48px); margin-bottom: 16px;">Третий экран</h2>
+                <p style="font-size: clamp(16px, 2.4vw, 20px); line-height: 1.5; opacity: 0.9;">
                     Например, контакты или форму обратной связи.
                 </p>
             </div>
@@ -181,7 +193,6 @@
         let currentRotation = 0;
 
         section1.addEventListener('mousemove', (e) => {
-            // Получаем позицию мыши относительно центра секции
             const rect = section1.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
@@ -189,16 +200,14 @@
             const mouseX = e.clientX - centerX;
             const mouseY = e.clientY - centerY;
             
-            // Вычисляем угол от центра к мышке
             const angle = Math.atan2(mouseY, mouseX);
             const targetRotation = angle * 180 / Math.PI;
             
-            // Плавно поворачиваем (разница не больше 180°)
             let diff = targetRotation - currentRotation;
             if (diff > 180) diff -= 360;
             if (diff < -180) diff += 360;
             
-            currentRotation += diff * 0.15; // Плавность
+            currentRotation += diff * 0.15;
             ponchik.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
         });
     </script>
