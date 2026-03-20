@@ -201,7 +201,7 @@
             const mouseY = e.clientY - centerY;
             
             const angle = Math.atan2(mouseY, mouseX);
-            const targetRotation = angle * 180 / Math.PI;
+            const targetRotation = angle * 360 / Math.PI;
             
             let diff = targetRotation - currentRotation;
             if (diff > 180) diff -= 360;
