@@ -79,7 +79,7 @@
             transition: rotate 0.3s ease-out;
         }
 
-        /* Плашка НАД пончиком */
+        /* Плашка НАД пончиком — с ЦЕНТРИРОВАНИЕМ */
         .glass {
             height: 100vh;
             width: 50vw;
@@ -100,7 +100,8 @@
             line-height: 1.6;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center;  /* Центр по вертикали */
+            align-items: center;      /* Центр по горизонтали — НОВОЕ! */
             gap: 24px;
         }
 
@@ -119,7 +120,7 @@
             opacity: 0.95;
         }
 
-        /* РОЗОВАЯ СВЕТЛЯЩАЯСЯ кнопка 450x50 */
+        /* КНОПКА 450x50 ПО ЦЕНТРУ */
         .works-btn {
             font-family: 'Chair406', sans-serif;
             width: 450px;
@@ -149,7 +150,7 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -80%;
+            left: -100%;
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
@@ -185,19 +186,14 @@
     <div class="page-wrapper">
         <!-- Экран 1 -->
         <section class="section section-1" id="section1">
-            <!-- Пончик В ЦЕНТРЕ, ПОД плашкой -->
             <img src="пончик 2.png" alt="Пончик" class="ponchik" id="ponchik">
-            
-            <!-- Плашка: Привет → Инфо → КНОПКА -->
             <div class="glass">
                 <h1 class="glass-title">Привет</h1>
-                
                 <p class="glass-info">
                     Я Соня — дизайнер, который превращает идеи в красивые и функциональные цифровые продукты. 
                     Создаю сайты, логотипы и другие элементы визуальной коммуникации, которые помогают бизнесу 
                     привлекать клиентов и увеличивать продажи.
                 </p>
-                
                 <a href="#section2" class="works-btn">Посмотреть работы</a>
             </div>
         </section>
@@ -258,7 +254,7 @@
             }, { passive: false });
         })();
 
-        // Кнопка "Посмотреть работы" → 2-й слайд
+        // Кнопка → 2-й слайд
         document.querySelector('.works-btn').addEventListener('click', function(e) {
             e.preventDefault();
             document.querySelector('.page-wrapper').scrollTo({
@@ -267,7 +263,7 @@
             });
         });
 
-        // Крутение пончика за мышкой
+        // Вращение пончика
         const ponchik = document.getElementById('ponchik');
         const section1 = document.querySelector('.section-1');
         let currentRotation = 0;
