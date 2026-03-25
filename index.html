@@ -248,7 +248,7 @@
             if (diff > 180) diff -= 360;
             if (diff < -180) diff += 360;
             
-            currentRotation += diff * 0.15;
+            currentRotation += diff * 1;
             ponchik.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
         });
     </script>
