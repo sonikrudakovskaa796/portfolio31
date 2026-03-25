@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Новый сайт</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <style>
         /* ШРИФТ CHAIR 406 */
         @font-face {
@@ -118,55 +117,40 @@
             opacity: 0.95;
         }
 
-        /* РОЗОВАЯ СВЕТЛЯЩАЯСЯ кнопка */
+        /* МАЛЕНЬКАЯ кнопка 1см × 5см */
         .works-btn {
             font-family: 'Chair406', sans-serif;
             background: linear-gradient(135deg, #ffd6eb, #ffeaf5);
-            border: 2px solid rgba(255, 214, 235, 0.8);
+            border: 1px solid rgba(255, 214, 235, 0.8);
             color: #3a1f2b;
-            padding: 3px 9px;
-            font-size: clamp(9px, 2.8vw, 15px);
-            border-radius: 10px;
+            width: 50px;  /* 5см = 50px */
+            height: 10px; /* 1см = 10px */
+            padding: 0;
+            font-size: 10px;  /* Очень маленький текст */
+            line-height: 10px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.3s ease;
             box-shadow: 
-                0 8px 25px rgba(255, 182, 224, 0.4),
-                0 0 30px rgba(255, 182, 224, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+                0 4px 12px rgba(255, 182, 224, 0.4),
+                0 0 15px rgba(255, 182, 224, 0.3);
             text-decoration: none;
-            display: inline-block;
-            font-weight: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 300;
             position: relative;
             overflow: hidden;
-        }
-
-        .works-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: left 0.6s;
+            text-align: center;
         }
 
         .works-btn:hover {
             background: linear-gradient(135deg, #ffeaf5, #ffd6eb);
-            transform: translateY(-5px) scale(1.05);
+            transform: translateY(-2px) scale(1.1);
             box-shadow: 
-                0 15px 40px rgba(255, 182, 224, 0.6),
-                0 0 50px rgba(255, 182, 224, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+                0 8px 20px rgba(255, 182, 224, 0.6),
+                0 0 25px rgba(255, 182, 224, 0.5);
             border-color: rgba(255, 182, 224, 1);
-        }
-
-        .works-btn:hover::before {
-            left: 100%;
-        }
-
-        .works-btn:active {
-            transform: translateY(-2px) scale(1.02);
         }
     </style>
 </head>
@@ -177,7 +161,7 @@
             <!-- Пончик В ЦЕНТРЕ, ПОД плашкой -->
             <img src="пончик 2.png" alt="Пончик" class="ponchik" id="ponchik">
             
-            <!-- Плашка: Привет → Инфо → РОЗОВАЯ кнопка -->
+            <!-- Плашка: Привет → Инфо → МАЛЕНЬКАЯ кнопка -->
             <div class="glass">
                 <h1 class="glass-title">Привет</h1>
                 
@@ -187,7 +171,7 @@
                     привлекать клиентов и увеличивать продажи.
                 </p>
                 
-                <a href="#section2" class="works-btn">Перейти к работам</a>
+                <a href="#section2" class="works-btn">→</a>
             </div>
         </section>
 
@@ -247,7 +231,7 @@
             }, { passive: false });
         })();
 
-        // Кнопка "Перейти к работам" → 2-й слайд
+        // Кнопка "→" → 2-й слайд
         document.querySelector('.works-btn').addEventListener('click', function(e) {
             e.preventDefault();
             document.querySelector('.page-wrapper').scrollTo({
