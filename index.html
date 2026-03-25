@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Новый сайт</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         /* ШРИФТ CHAIR 406 */
         @font-face {
@@ -117,18 +118,18 @@
             opacity: 0.95;
         }
 
-        /* МАЛЕНЬКАЯ кнопка 1см × 5см */
+        /* КНОПКА 1см (высота) × 5см (ширина) */
         .works-btn {
             font-family: 'Chair406', sans-serif;
             background: linear-gradient(135deg, #ffd6eb, #ffeaf5);
-            border: 20px solid rgba(255, 214, 235, 0.8);
+            border: 1px solid rgba(255, 214, 235, 0.8);
             color: #3a1f2b;
-            width: 90px;  /* 5см = 50px */
-            height: 50px; /* 1см = 10px */
+            width: 50px;    /* 5см ширины */
+            height: 10px;   /* 1см высоты */
             padding: 0;
-            font-size: 30px;  /* Очень маленький текст */
+            font-size: 8px;
             line-height: 10px;
-            border-radius: 50px;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 
@@ -141,15 +142,12 @@
             font-weight: 300;
             position: relative;
             overflow: hidden;
-            text-align: center;
+            box-sizing: border-box;
         }
 
         .works-btn:hover {
             background: linear-gradient(135deg, #ffeaf5, #ffd6eb);
             transform: translateY(-2px) scale(1.1);
-            box-shadow: 
-                0 8px 20px rgba(255, 182, 224, 0.6),
-                0 0 25px rgba(255, 182, 224, 0.5);
             border-color: rgba(255, 182, 224, 1);
         }
     </style>
@@ -161,7 +159,7 @@
             <!-- Пончик В ЦЕНТРЕ, ПОД плашкой -->
             <img src="пончик 2.png" alt="Пончик" class="ponchik" id="ponchik">
             
-            <!-- Плашка: Привет → Инфо → МАЛЕНЬКАЯ кнопка -->
+            <!-- Плашка: Привет → Инфо → КНОПКА 1×5 см -->
             <div class="glass">
                 <h1 class="glass-title">Привет</h1>
                 
@@ -200,69 +198,4 @@
         // Скролл по колёсику
         (function () {
             const wrapper = document.querySelector('.page-wrapper');
-            const sections = Array.from(document.querySelectorAll('.section'));
-            let isScrolling = false;
-
-            wrapper.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                if (isScrolling) return;
-
-                const direction = e.deltaY > 0 ? 1 : -1;
-                const currentScroll = wrapper.scrollTop;
-                const viewportHeight = window.innerHeight;
-
-                const currentIndex = Math.round(currentScroll / viewportHeight);
-                let targetIndex = currentIndex + direction;
-
-                if (targetIndex < 0) targetIndex = 0;
-                if (targetIndex > sections.length - 1) targetIndex = sections.length - 1;
-
-                const targetOffset = targetIndex * viewportHeight;
-
-                isScrolling = true;
-                wrapper.scrollTo({
-                    top: targetOffset,
-                    behavior: 'smooth'
-                });
-
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 700);
-            }, { passive: false });
-        })();
-
-        // Кнопка "→" → 2-й слайд
-        document.querySelector('.works-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('.page-wrapper').scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
-            });
-        });
-
-        // Крутение пончика за мышкой
-        const ponchik = document.getElementById('ponchik');
-        const section1 = document.querySelector('.section-1');
-        let currentRotation = 0;
-
-        section1.addEventListener('mousemove', (e) => {
-            const rect = section1.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            
-            const mouseX = e.clientX - centerX;
-            const mouseY = e.clientY - centerY;
-            
-            const angle = Math.atan2(mouseY, mouseX);
-            const targetRotation = angle * 180 / Math.PI;
-            
-            let diff = targetRotation - currentRotation;
-            if (diff > 180) diff -= 360;
-            if (diff < -180) diff += 360;
-            
-            currentRotation += diff * 1;
-            ponchik.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
-        });
-    </script>
-</body>
-</html>
+            const sections
