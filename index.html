@@ -2,8 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Новый сайт</title>
+    <title>Соня — Дизайнер</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href="Chair406.otf" as="font" type="font/otf" crossorigin>
 
     <style>
         /* ШРИФТ CHAIR 406 */
@@ -118,23 +119,22 @@
             opacity: 0.95;
         }
 
-        /* КНОПКА 1см (высота) × 5см (ширина) */
+        /* РОЗОВАЯ СВЕТЛЯЩАЯСЯ кнопка 450x50 */
         .works-btn {
             font-family: 'Chair406', sans-serif;
+            width: 450px;
+            height: 50px;
             background: linear-gradient(135deg, #ffd6eb, #ffeaf5);
-            border: 1px solid rgba(255, 214, 235, 0.8);
+            border: 2px solid rgba(255, 214, 235, 0.8);
             color: #3a1f2b;
-            width: 450px;    /* 5см ширины */
-            height: 50px;   /* 1см высоты */
-            padding: 0;
-            font-size: 100px;
-            line-height: 10px;
-            border-radius: 50px;
+            font-size: clamp(16px, 2.2vw, 20px);
+            border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 
-                0 4px 12px rgba(255, 182, 224, 0.4),
-                0 0 15px rgba(255, 182, 224, 0.3);
+                0 8px 25px rgba(255, 182, 224, 0.4),
+                0 0 30px rgba(255, 182, 224, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -142,13 +142,42 @@
             font-weight: 300;
             position: relative;
             overflow: hidden;
-            box-sizing: border-box;
+            padding: 0;
+        }
+
+        .works-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
         }
 
         .works-btn:hover {
             background: linear-gradient(135deg, #ffeaf5, #ffd6eb);
-            transform: translateY(-2px) scale(1.1);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(255, 182, 224, 0.6),
+                0 0 50px rgba(255, 182, 224, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
             border-color: rgba(255, 182, 224, 1);
+        }
+
+        .works-btn:hover::before {
+            left: 100%;
+        }
+
+        .works-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .glass { left: 5%; width: 90%; }
+            .works-btn { width: 90vw; max-width: 450px; }
+            .ponchik { filter: drop-shadow(0 15px 30px rgba(255, 182, 224, 0.5)); }
         }
     </style>
 </head>
@@ -159,7 +188,7 @@
             <!-- Пончик В ЦЕНТРЕ, ПОД плашкой -->
             <img src="пончик 2.png" alt="Пончик" class="ponchik" id="ponchik">
             
-            <!-- Плашка: Привет → Инфо → КНОПКА 1×5 см -->
+            <!-- Плашка: Привет → Инфо → КНОПКА -->
             <div class="glass">
                 <h1 class="glass-title">Привет</h1>
                 
@@ -169,7 +198,7 @@
                     привлекать клиентов и увеличивать продажи.
                 </p>
                 
-                <a href="#section2" class="works-btn">→</a>
+                <a href="#section2" class="works-btn">Посмотреть работы</a>
             </div>
         </section>
 
@@ -198,4 +227,69 @@
         // Скролл по колёсику
         (function () {
             const wrapper = document.querySelector('.page-wrapper');
-            const sections
+            const sections = Array.from(document.querySelectorAll('.section'));
+            let isScrolling = false;
+
+            wrapper.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                if (isScrolling) return;
+
+                const direction = e.deltaY > 0 ? 1 : -1;
+                const currentScroll = wrapper.scrollTop;
+                const viewportHeight = window.innerHeight;
+
+                const currentIndex = Math.round(currentScroll / viewportHeight);
+                let targetIndex = currentIndex + direction;
+
+                if (targetIndex < 0) targetIndex = 0;
+                if (targetIndex > sections.length - 1) targetIndex = sections.length - 1;
+
+                const targetOffset = targetIndex * viewportHeight;
+
+                isScrolling = true;
+                wrapper.scrollTo({
+                    top: targetOffset,
+                    behavior: 'smooth'
+                });
+
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 700);
+            }, { passive: false });
+        })();
+
+        // Кнопка "Посмотреть работы" → 2-й слайд
+        document.querySelector('.works-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.page-wrapper').scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+
+        // Крутение пончика за мышкой
+        const ponchik = document.getElementById('ponchik');
+        const section1 = document.querySelector('.section-1');
+        let currentRotation = 0;
+
+        section1.addEventListener('mousemove', (e) => {
+            const rect = section1.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const mouseX = e.clientX - centerX;
+            const mouseY = e.clientY - centerY;
+            
+            const angle = Math.atan2(mouseY, mouseX);
+            const targetRotation = angle * 180 / Math.PI;
+            
+            let diff = targetRotation - currentRotation;
+            if (diff > 180) diff -= 360;
+            if (diff < -180) diff += 360;
+            
+            currentRotation += diff * 1;
+            ponchik.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
+        });
+    </script>
+</body>
+</html>
