@@ -100,58 +100,86 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            gap: 24px;
         }
 
         .glass-title {
             font-family: 'Chair406', sans-serif;
-            font-size: clamp(28px, 5vw, 42px);
+            font-size: clamp(36px, 7vw, 56px);
             font-weight: 600;
-            margin-bottom: 28px;
             color: #3a1f2b;
+            margin-bottom: 0;
         }
 
-        .section-2 h2,
-        .section-3 h2,
-        .section-2 p,
-        .section-3 p {
+        .glass-info {
             font-family: 'Chair406', sans-serif;
+            font-size: clamp(20px, 3.5vw, 28px); /* КРУПНЕЕ */
+            line-height: 1.4;
+            opacity: 0.95;
+        }
+
+        /* Кнопка "Перейти к работам" */
+        .works-btn {
+            font-family: 'Chair406', sans-serif;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: #3a1f2b;
+            padding: 18px 40px;
+            font-size: clamp(18px, 2.8vw, 24px);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .works-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
 <body>
     <div class="page-wrapper">
         <!-- Экран 1 -->
-        <section class="section section-1">
-            <!-- Пончик В ЦЕНТРЕ, ПОД плашкой (z-index: 1) -->
+        <section class="section section-1" id="section1">
+            <!-- Пончик В ЦЕНТРЕ, ПОД плашкой -->
             <img src="пончик 2.png" alt="Пончик" class="ponchik" id="ponchik">
             
-            <!-- Плашка НАД пончиком (z-index: 2) -->
+            <!-- Плашка: Привет → Инфо → Кнопка -->
             <div class="glass">
-                <h1 class="glass-title">Соня</h1>
-                <p>
+                <h1 class="glass-title">Привет</h1>
+                
+                <p class="glass-info">
                     Я Соня — дизайнер, который превращает идеи в красивые и функциональные цифровые продукты. 
                     Создаю сайты, логотипы и другие элементы визуальной коммуникации, которые помогают бизнесу 
                     привлекать клиентов и увеличивать продажи.
                 </p>
+                
+                <a href="#section2" class="works-btn">Перейти к работам</a>
             </div>
         </section>
 
         <!-- Экран 2 -->
-        <section class="section section-2">
+        <section class="section section-2" id="section2">
             <div style="max-width: 800px; text-align: center;">
-                <h2 style="font-size: clamp(32px, 5vw, 48px); margin-bottom: 16px;">Второй экран</h2>
-                <p style="font-size: clamp(16px, 2.4vw, 20px); line-height: 1.5; opacity: 0.9;">
-                    Тут можно разместить постеры, работы, фотографии или описание услуг.
+                <h2 style="font-family: 'Chair406', sans-serif; font-size: clamp(32px, 5vw, 48px); margin-bottom: 16px;">Работы</h2>
+                <p style="font-family: 'Chair406', sans-serif; font-size: clamp(16px, 2.4vw, 20px); line-height: 1.5; opacity: 0.9;">
+                    Тут размещаются постеры, работы, фотографии или описание услуг.
                 </p>
             </div>
         </section>
 
         <!-- Экран 3 -->
-        <section class="section section-3">
+        <section class="section section-3" id="section3">
             <div style="max-width: 800px; text-align: center;">
-                <h2 style="font-size: clamp(32px, 5vw, 48px); margin-bottom: 16px;">Третий экран</h2>
-                <p style="font-size: clamp(16px, 2.4vw, 20px); line-height: 1.5; opacity: 0.9;">
-                    Например, контакты или форму обратной связи.
+                <h2 style="font-family: 'Chair406', sans-serif; font-size: clamp(32px, 5vw, 48px); margin-bottom: 16px;">Контакты</h2>
+                <p style="font-family: 'Chair406', sans-serif; font-size: clamp(16px, 2.4vw, 20px); line-height: 1.5; opacity: 0.9;">
+                    Здесь контакты или форма обратной связи.
                 </p>
             </div>
         </section>
@@ -192,6 +220,15 @@
             }, { passive: false });
         })();
 
+        // Кнопка "Перейти к работам" → 2-й слайд
+        document.querySelector('.works-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.page-wrapper').scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+
         // Крутение пончика за мышкой
         const ponchik = document.getElementById('ponchik');
         const section1 = document.querySelector('.section-1');
@@ -212,7 +249,7 @@
             if (diff > 180) diff -= 360;
             if (diff < -180) diff += 360;
             
-            currentRotation += diff * 1;
+            currentRotation += diff * 0.15;
             ponchik.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
         });
     </script>
