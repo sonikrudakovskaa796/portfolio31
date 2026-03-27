@@ -156,12 +156,11 @@
 
         .nav-btn:hover::before { left: 100%; }
 
-        /* ВТОРОЙ СЛАЙД - ПЛАШКА СЛЕВА + ОКОШКО ПОСТЕРОВ */
+        /* ВТОРОЙ СЛАЙД */
         .section-2 {
             display: block;
         }
 
-        /* ПЛАШКА СЛЕВА */
         .works-panel {
             position: absolute;
             left: 0;
@@ -221,7 +220,6 @@
             box-shadow: 0 0 10px rgba(255, 214, 235, 0.8);
         }
 
-        /* УЛУЧШЕННОЕ ОКОШКО С ПОСТЕРАМИ */
         .works-window {
             position: absolute;
             left: 50%;
@@ -272,7 +270,7 @@
             transform: scale(1.02);
         }
 
-        /* ТРЕТИЙ СЛАЙД - КОНТАКТЫ */
+        /* ТРЕТИЙ СЛАЙД - КОНТАКТЫ (ТЕПЕРЬ КНОПКИ-ССЫЛКИ) */
         .contacts-container {
             display: flex;
             flex-direction: column;
@@ -314,6 +312,10 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .contact-item::before {
@@ -331,6 +333,7 @@
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 25px 60px rgba(255, 182, 224, 0.5);
             border-color: rgba(255, 182, 224, 0.8);
+            color: #3a1f2b;
         }
 
         .contact-item:hover::before {
@@ -399,7 +402,7 @@
             </div>
         </section>
 
-        <!-- ЭКРАН 2 - ПЛАШКА СЛЕВА + ОКОШКО ПОСТЕРОВ -->
+        <!-- ЭКРАН 2 -->
         <section class="section section-2" id="section2">
             <div class="works-panel">
                 <h3 class="works-title" id="workTitle">Плакат 1</h3>
@@ -423,21 +426,21 @@
             </div>
         </section>
 
-        <!-- ЭКРАН 3 - КОНТАКТЫ -->
+        <!-- ЭКРАН 3 - КОНТАКТЫ С ССЫЛКАМИ -->
         <section class="section section-3" id="section3">
             <div class="contacts-container">
                 <h2 class="contacts-title">Связаться со мной</h2>
                 
                 <div class="contacts-list">
-                    <div class="contact-item">
-                        📱 <strong>+7 (922) 953-76-00</strong>
-                    </div>
-                    <div class="contact-item">
-                        💌 <strong>rudakovskayasx@gmail.com</strong>
-                    </div>
-                    <div class="contact-item">
-                        ✈️ <strong>@ssrwqf</strong>
-                    </div>
+                    <a href="tel:+79229537600" class="contact-item">
+                        📱 +7 (922) 953-76-00
+                    </a>
+                    <a href="mailto:rudakovskayasx@gmail.com" class="contact-item">
+                        💌 rudakovskayasx@gmail.com
+                    </a>
+                    <a href="https://t.me/ssrwqf" class="contact-item">
+                        ✈️ @ssrwqf
+                    </a>
                 </div>
                 
                 <div class="thanks-text">thanks u for watching</div>
@@ -498,7 +501,7 @@
             ponchik.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
         });
 
-        // ДАННЫЕ ПОСТЕРОВ
+        // СЛАЙДЕР ПОСТЕРОВ
         const works = [
             { title: 'Плакат 1', price: '5 000 ₽' },
             { title: 'Merry Christmas', price: '6 500 ₽' },
