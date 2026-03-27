@@ -7,7 +7,9 @@
     <link rel="preload" href="Chair406.otf" as="font" type="font/otf" crossorigin>
 
     <style>
-        /* ШРИФТ CHAIR 406 */
+        /* ========================================
+           ШРИФТ CHAIR 406 - ЛОКАЛЬНЫЙ OTF ФАЙЛ
+        ======================================== */
         @font-face {
             font-family: 'Chair406';
             src: url('Chair406.otf') format('opentype');
@@ -16,6 +18,9 @@
             font-display: swap;
         }
 
+        /* ========================================
+           ОСНОВНЫЕ СТИЛИ - СБРОС И БАЗА
+        ======================================== */
         * {
             margin: 0;
             padding: 0;
@@ -32,6 +37,9 @@
             background: #ffe6f0;
         }
 
+        /* ========================================
+           ОСНОВНОЙ КОНТЕЙНЕР - СКРОЛЛ-СНАП
+        ======================================== */
         .page-wrapper {
             height: 100vh;
             width: 100vw;
@@ -52,19 +60,13 @@
             position: relative;
         }
 
-        .section-1 {
-            background: linear-gradient(135deg, #ffe6f0, #ffd6eb);
-        }
+        .section-1 { background: linear-gradient(135deg, #ffe6f0, #ffd6eb); }
+        .section-2 { background: linear-gradient(135deg, #ffdbe8, #ffeaf5); }
+        .section-3 { background: linear-gradient(135deg, #ffeef7, #ffd9f0); }
 
-        .section-2 {
-            background: linear-gradient(135deg, #ffdbe8, #ffeaf5);
-        }
-
-        .section-3 {
-            background: linear-gradient(135deg, #ffeef7, #ffd9f0);
-        }
-
-        /* Пончик */
+        /* ========================================
+           ПЕРВЫЙ СЛАЙД - ПОНЧИК И ПЛАШКА
+        ======================================== */
         .ponchik {
             position: absolute;
             top: 50%;
@@ -79,7 +81,6 @@
             transition: rotate 0.3s ease-out;
         }
 
-        /* Плашка НАД пончиком */
         .glass {
             height: 100vh;
             width: 50vw;
@@ -87,8 +88,6 @@
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: none;
-            box-shadow: none;
             color: #4a2b3c;
             text-align: center;
             position: absolute;
@@ -110,7 +109,6 @@
             font-size: clamp(36px, 7vw, 56px);
             font-weight: 600;
             color: #3a1f2b;
-            margin-bottom: 0;
         }
 
         .glass-info {
@@ -120,7 +118,9 @@
             opacity: 0.95;
         }
 
-        /* КНОПКИ НАВИГАЦИИ */
+        /* ========================================
+           КНОПКИ НАВИГАЦИИ - ДВЕ КНОПКИ НА 1 СЛАЙДЕ
+        ======================================== */
         .nav-btn {
             font-family: 'Chair406', sans-serif;
             width: 450px;
@@ -168,22 +168,22 @@
             border-color: rgba(255, 182, 224, 1);
         }
 
-        .nav-btn:hover::before {
-            left: 100%;
-        }
-
-        /* СЛАЙДЕР ПОСТЕРОВ — ЦЕНТР */
+        /* ========================================
+           ВТОРОЙ СЛАЙД - ПОСТЕРЫ И ПЛАШКА
+        ======================================== */
+        /* ПОСТЕРЫ В СЕРЕДИНЕ - ОТСТУП 25СМ (160PX) ОТ КРАЕВ */
         .works-container {
             position: relative;
+            width: calc(100% - 320px); /* 25см*2 = 50см отступ */
+            max-width: calc(100vw - 320px);
+            height: 100%;
+            margin: 0 auto;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            height: 100%;
-            gap: 30px;
         }
 
+        /* САМ СЛАЙДЕР ПОСТЕРОВ */
         .works-slider {
             position: relative;
             width: clamp(570px, 50vw, 570px);
@@ -214,50 +214,64 @@
             border-radius: 20px;
         }
 
-        /* ПЛАШКА ПОД ПОСТЕРОМ */
+        /* ПЛАШКА СЛЕВА - 8СМ ШИРИНОЙ, ВО ВСЮ ВЫСОТУ */
         .works-panel {
-            position: relative;
-            width: clamp(320px, 48vw, 520px);
-            padding: 28px 24px;
-            background: rgba(255, 255, 255, 0.15);
+            position: absolute;
+            left: -160px; /* Чётко у края слева */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px; /* 8см */
+            height: 90vh; /* Во всю длину слайда */
+            padding: 20px 12px;
+            background: rgba(255, 255, 255, 0.18);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border-radius: 25px;
+            border-radius: 0 20px 20px 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            gap: 14px;
-            box-shadow: 0 20px 60px rgba(255, 182, 224, 0.4);
+            gap: 16px;
+            box-shadow: 10px 0 40px rgba(255, 182, 224, 0.4);
+            writing-mode: vertical-rl; /* Вертикальный текст */
+            text-orientation: mixed;
         }
 
         .works-title {
             font-family: 'Chair406', sans-serif;
-            font-size: clamp(22px, 3vw, 28px);
+            font-size: clamp(14px, 2vw, 18px);
             font-weight: 600;
             color: #3a1f2b;
             margin: 0;
-            line-height: 1.3;
+            line-height: 1.2;
+            writing-mode: horizontal-tb; /* Горизонтальный для заголовка */
+            transform: rotate(-90deg);
+            white-space: nowrap;
         }
 
         .works-price {
             font-family: 'Chair406', sans-serif;
-            font-size: clamp(20px, 2.8vw, 26px);
+            font-size: clamp(18px, 2.5vw, 22px);
             color: #4a2b3c;
             font-weight: 700;
             background: linear-gradient(135deg, #ffd6eb, #ffeaf5);
-            padding: 10px 20px;
-            border-radius: 20px;
+            padding: 8px 12px;
+            border-radius: 15px;
             box-shadow: 0 6px 20px rgba(255, 182, 224, 0.4);
+            writing-mode: horizontal-tb;
+            transform: rotate(-90deg);
+            white-space: nowrap;
+            min-width: 60px;
         }
 
-        /* ТОЧКИ */
+        /* ТОЧКИ СЛАЙДЕРА */
         .slider-dots {
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            gap: 8px;
             justify-content: center;
-            margin-top: 8px;
+            margin-top: 12px;
         }
 
         .dot {
@@ -275,19 +289,34 @@
             box-shadow: 0 0 8px rgba(255, 214, 235, 0.8);
         }
 
+        /* ========================================
+           МОБИЛЬНАЯ АДАПТАЦИЯ
+        ======================================== */
         @media (max-width: 768px) {
             .glass { left: 5%; width: 90%; }
             .nav-btn { width: 90vw; max-width: 450px; }
             .ponchik { filter: drop-shadow(0 15px 30px rgba(255, 182, 224, 0.5)); }
             
-            .works-container { gap: 20px; }
-            .works-panel { width: 90vw; padding: 25px 20px; }
+            .works-container { 
+                width: calc(100% - 40px); 
+                margin: 0 20px; 
+            }
+            .works-panel { 
+                left: -20px;
+                width: 60px;
+                height: 70vh;
+                padding: 15px 8px;
+            }
+            .works-title { font-size: 12px; }
+            .works-price { font-size: 16px; padding: 6px 8px; }
         }
     </style>
 </head>
 <body>
     <div class="page-wrapper">
-        <!-- Экран 1 -->
+        <!-- ========================================
+             ЭКРАН 1 - ПРИВЕТСТВИЕ С ПОНЧИКОМ
+        ======================================== -->
         <section class="section section-1" id="section1">
             <img src="пончик 2.png" alt="Пончик" class="ponchik" id="ponchik">
             <div class="glass">
@@ -302,10 +331,19 @@
             </div>
         </section>
 
-        <!-- Экран 2 — ВАШИ ПОСТЕРЫ -->
+        <!-- ========================================
+             ЭКРАН 2 - РАБОТЫ (ПОСТЕРЫ + ПЛАШКА СЛЕВА)
+        ======================================== -->
         <section class="section section-2" id="section2">
+            <!-- ПЛАШКА СЛЕВА (8см х вся высота) -->
+            <div class="works-panel">
+                <h3 class="works-title" id="workTitle">Плакат 1</h3>
+                <div class="works-price" id="workPrice">5 000 ₽</div>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+            
+            <!-- ПОСТЕРЫ В СЕРЕДИНЕ (отступ 25см от краёв) -->
             <div class="works-container">
-                <!-- Слайдер с реальными постерами -->
                 <div class="works-slider" id="worksSlider">
                     <div class="works-slide active">
                         <img src="плакат 1 (2).png" alt="Плакат 1">
@@ -320,17 +358,12 @@
                         <img src="пляж3.jpg" alt="Пляж 3">
                     </div>
                 </div>
-                
-                <!-- Плашка ПОД постером -->
-                <div class="works-panel">
-                    <h3 class="works-title" id="workTitle">Плакат 1</h3>
-                    <div class="works-price" id="workPrice">5 000 ₽</div>
-                    <div class="slider-dots" id="sliderDots"></div>
-                </div>
             </div>
         </section>
 
-        <!-- Экран 3 -->
+        <!-- ========================================
+             ЭКРАН 3 - КОНТАКТЫ
+        ======================================== -->
         <section class="section section-3" id="section3">
             <div style="max-width: 800px; text-align: center;">
                 <h2 style="font-family: 'Chair406', sans-serif; font-size: clamp(32px, 5vw, 48px); margin-bottom: 16px;">Контакты</h2>
@@ -342,7 +375,11 @@
     </div>
 
     <script>
-        // Скролл по колёсику
+        /* ========================================
+           СКРИПТЫ - СКРОЛЛ, НАВИГАЦИЯ, АНИМАЦИИ
+        ======================================== */
+
+        // 1. СКРОЛЛ ПО КОЛЁСИКУ (ЗАПРЕТ ДЕФОЛТА + СНАП)
         (function () {
             const wrapper = document.querySelector('.page-wrapper');
             const sections = Array.from(document.querySelectorAll('.section'));
@@ -355,28 +392,23 @@
                 const direction = e.deltaY > 0 ? 1 : -1;
                 const currentScroll = wrapper.scrollTop;
                 const viewportHeight = window.innerHeight;
-
                 const currentIndex = Math.round(currentScroll / viewportHeight);
                 let targetIndex = currentIndex + direction;
 
                 if (targetIndex < 0) targetIndex = 0;
                 if (targetIndex > sections.length - 1) targetIndex = sections.length - 1;
 
-                const targetOffset = targetIndex * viewportHeight;
-
                 isScrolling = true;
                 wrapper.scrollTo({
-                    top: targetOffset,
+                    top: targetIndex * viewportHeight,
                     behavior: 'smooth'
                 });
 
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 700);
+                setTimeout(() => { isScrolling = false; }, 700);
             }, { passive: false });
         })();
 
-        // Кнопки навигации
+        // 2. КНОПКИ НАВИГАЦИИ
         document.querySelector('.works-btn').addEventListener('click', function(e) {
             e.preventDefault();
             document.querySelector('.page-wrapper').scrollTo({
@@ -393,7 +425,7 @@
             });
         });
 
-        // Вращение пончика
+        // 3. ВРАЩЕНИЕ ПОНЧИКА ПО МАУСИ
         const ponchik = document.getElementById('ponchik');
         const section1 = document.querySelector('.section-1');
         let currentRotation = 0;
@@ -405,7 +437,6 @@
             
             const mouseX = e.clientX - centerX;
             const mouseY = e.clientY - centerY;
-            
             const angle = Math.atan2(mouseY, mouseX);
             const targetRotation = angle * 180 / Math.PI;
             
@@ -417,7 +448,7 @@
             ponchik.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
         });
 
-        // ДАННЫЕ ВАШИХ ПОСТЕРОВ
+        // 4. ДАННЫЕ ПОСТЕРОВ
         const works = [
             { title: 'Плакат 1', price: '5 000 ₽' },
             { title: 'Merry Christmas', price: '6 500 ₽' },
@@ -429,20 +460,15 @@
         const slideDuration = 4000;
         let slideTimer;
 
+        // 5. ФУНКЦИИ СЛАЙДЕРА
         function updateSlider(index) {
             const slides = document.querySelectorAll('.works-slide');
             const dots = document.querySelectorAll('.dot');
             const titleEl = document.getElementById('workTitle');
             const priceEl = document.getElementById('workPrice');
 
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
-
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
             titleEl.textContent = works[index].title;
             priceEl.textContent = works[index].price;
         }
@@ -456,6 +482,7 @@
             slideTimer = setInterval(nextSlide, slideDuration);
         }
 
+        // 6. ИНИЦИАЛИЗАЦИЯ СЛАЙДЕРА
         function initSlider() {
             const dotsContainer = document.getElementById('sliderDots');
             
@@ -466,7 +493,7 @@
                     currentSlide = index;
                     updateSlider(index);
                     clearInterval(slideTimer);
-                    setTimeout(startSlider, 1000); // Пауза 1 сек после клика
+                    setTimeout(startSlider, 1000);
                 });
                 dotsContainer.appendChild(dot);
             });
