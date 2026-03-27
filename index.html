@@ -58,13 +58,14 @@
 
         .section-2 {
             background: linear-gradient(135deg, #ffdbe8, #ffeaf5);
+            justify-content: flex-start;
         }
 
         .section-3 {
             background: linear-gradient(135deg, #ffeef7, #ffd9f0);
         }
 
-        /* Пончик В ЦЕНТРЕ - ПОД плашкой */
+        /* Пончик в центре — под плашкой */
         .ponchik {
             position: absolute;
             top: 50%;
@@ -79,7 +80,7 @@
             transition: rotate 0.3s ease-out;
         }
 
-        /* Плашка НАД пончиком — с ЦЕНТРИРОВАНИЕМ */
+        /* Плашка НАД пончиком — с центрированием */
         .glass {
             height: 100vh;
             width: 50vw;
@@ -100,8 +101,8 @@
             line-height: 1.6;
             display: flex;
             flex-direction: column;
-            justify-content: center;  /* Центр по вертикали */
-            align-items: center;      /* Центр по горизонтали — НОВОЕ! */
+            justify-content: center;
+            align-items: center;
             gap: 24px;
         }
 
@@ -175,10 +176,123 @@
             transform: translateY(-2px) scale(1.02);
         }
 
+        /* Секция 2 – слайдер работ */
+        .section-2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .slider-container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            height: 100vh;
+        }
+
+        /* Плашка слева */
+        .price-panel {
+            flex-shrink: 0;
+            width: 300px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-right: 1px solid rgba(255, 214, 235, 0.3);
+            color: #4a2b3c;
+            text-align: center;
+        }
+
+        .price-title {
+            font-family: 'Chair406', sans-serif;
+            font-size: clamp(24px, 4vw, 32px);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .price-value {
+            font-family: 'Chair406', sans-serif;
+            font-size: clamp(18px, 2.6vw, 24px);
+            margin-top: 12px;
+            opacity: 0.9;
+        }
+
+        /* Точки индикатора по центру над ценой */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255, 182, 224, 0.4);
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .slider-dot.active {
+            background-color: rgba(255, 182, 224, 0.9);
+        }
+
+        /* Слайдер по центру */
+        .slider {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .slider-item {
+            flex-shrink: 0;
+            width: 570px;
+            height: 1122px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(255, 182, 224, 0.4);
+            margin: 0 20px;
+        }
+
         @media (max-width: 768px) {
             .glass { left: 5%; width: 90%; }
             .works-btn { width: 90vw; max-width: 450px; }
             .ponchik { filter: drop-shadow(0 15px 30px rgba(255, 182, 224, 0.5)); }
+
+            /* Адаптация на мобильных */
+            .slider-container {
+                flex-direction: column;
+                height: auto;
+                padding-top: 40px;
+                padding-bottom: 40px;
+            }
+
+            .price-panel {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 214, 235, 0.3);
+                padding-bottom: 30px;
+            }
+
+            .slider {
+                margin-top: 20px;
+            }
+
+            .slider-item {
+                width: clamp(280px, 80vw, 570px);
+                height: auto;
+                aspect-ratio: 570 / 1122;
+            }
         }
     </style>
 </head>
@@ -198,13 +312,25 @@
             </div>
         </section>
 
-        <!-- Экран 2 -->
+        <!-- Экран 2 (слайдер работ) -->
         <section class="section section-2" id="section2">
-            <div style="max-width: 800px; text-align: center;">
-                <h2 style="font-family: 'Chair406', sans-serif; font-size: clamp(32px, 5vw, 48px); margin-bottom: 16px;">Работы</h2>
-                <p style="font-family: 'Chair406', sans-serif; font-size: clamp(16px, 2.4vw, 20px); line-height: 1.5; opacity: 0.9;">
-                    Тут размещаются постеры, работы, фотографии или описание услуг.
-                </p>
+            <div class="slider-container">
+                <!-- Плашка слева -->
+                <div class="price-panel">
+                    <h2 class="price-title">Название работы</h2>
+                    <div class="slider-dots"></div>
+                    <p class="price-value">Цена: 3 500 ₽</p>
+                </div>
+
+                <!-- Слайдер постеров по центру -->
+                <div class="slider">
+                    <div class="slider-track">
+                        <img src="poster-1.png" alt="Постер 1" class="slider-item" width="570" height="1122">
+                        <img src="poster-2.png" alt="Постер 2" class="slider-item" width="570" height="1122">
+                        <img src="poster-3.png" alt="Постер 3" class="slider-item" width="570" height="1122">
+                        <img src="poster-4.png" alt="Постер 4" class="slider-item" width="570" height="1122">
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -286,6 +412,30 @@
             currentRotation += diff * 1;
             ponchik.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
         });
-    </script>
-</body>
-</html>
+
+        // Слайдер работ (экран 2)
+        (function () {
+            const sliderTrack = document.querySelector('.slider-track');
+            const items = document.querySelectorAll('.slider-item');
+            const dotsContainer = document.querySelector('.slider-dots');
+            const priceTitle = document.querySelector('.price-title');
+            const priceValue = document.querySelector('.price-value');
+
+            const total = items.length;
+            let index = 0;
+
+            // Названия и цены для каждой работы
+            const works = [
+                { title: "Постер «Весна»", price: "3 500 ₽" },
+                { title: "Постер «Город светов»", price: "4 2 20 ₽" },
+                { title: "Постер «Чайная вечеринка»", price: "3 800 ₽" },
+                { title: "Постер «Сердца»", price: "3 500 ₽" }
+            ];
+
+            // Создаём точки
+            for (let i = 0; i < total; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('slider-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    index =
