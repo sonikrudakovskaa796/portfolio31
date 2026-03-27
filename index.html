@@ -54,7 +54,11 @@
 
         .section-1 { background: linear-gradient(135deg, #ffe6f0, #ffd6eb); }
         .section-2 { background: linear-gradient(135deg, #ffdbe8, #ffeaf5); }
-        .section-3 { background: linear-gradient(135deg, #ffeef7, #ffd9f0); }
+        .section-3 { 
+            background: linear-gradient(135deg, #ffeef7, #ffd9f0); 
+            flex-direction: column;
+            gap: 40px;
+        }
 
         /* ПЕРВЫЙ СЛАЙД */
         .ponchik {
@@ -217,7 +221,7 @@
             box-shadow: 0 0 10px rgba(255, 214, 235, 0.8);
         }
 
-        /* УЛУЧШЕННОЕ ОКОШКО С ПОСТЕРАМИ С ПОДГОНОМ РАЗМЕРОВ */
+        /* УЛУЧШЕННОЕ ОКОШКО С ПОСТЕРАМИ */
         .works-window {
             position: absolute;
             left: 50%;
@@ -258,7 +262,7 @@
             max-height: 100%;
             width: auto;
             height: auto;
-            object-fit: contain; /* Изменено с cover на contain для подгонки */
+            object-fit: contain;
             border-radius: 22px;
             box-shadow: 0 20px 50px rgba(255, 182, 224, 0.4);
             transition: transform 0.3s ease;
@@ -266,6 +270,80 @@
 
         .works-slide.active img {
             transform: scale(1.02);
+        }
+
+        /* ТРЕТИЙ СЛАЙД - КОНТАКТЫ */
+        .contacts-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            max-width: 600px;
+            text-align: center;
+            height: 100%;
+        }
+
+        .contacts-title {
+            font-family: 'Chair406', sans-serif;
+            font-size: clamp(32px, 8vw, 64px);
+            font-weight: 600;
+            color: #3a1f2b;
+            margin-bottom: 20px;
+        }
+
+        .contacts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+        }
+
+        .contact-item {
+            font-family: 'Chair406', sans-serif;
+            font-size: clamp(20px, 4vw, 28px);
+            color: #4a2b3c;
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(255, 182, 224, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(255, 182, 224, 0.5);
+            border-color: rgba(255, 182, 224, 0.8);
+        }
+
+        .contact-item:hover::before {
+            left: 100%;
+        }
+
+        .thanks-text {
+            font-family: 'Chair406', sans-serif;
+            font-size: clamp(24px, 5vw, 36px);
+            color: #3a1f2b;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-top: 20px;
         }
 
         /* АДАПТИВНОСТЬ */
@@ -293,6 +371,14 @@
             .works-slide {
                 padding: 10px;
             }
+
+            .contacts-container {
+                gap: 25px;
+                padding: 20px;
+            }
+            .contact-item {
+                padding: 15px 20px;
+            }
         }
     </style>
 </head>
@@ -315,14 +401,12 @@
 
         <!-- ЭКРАН 2 - ПЛАШКА СЛЕВА + ОКОШКО ПОСТЕРОВ -->
         <section class="section section-2" id="section2">
-            <!-- ПЛАШКА СЛЕВА -->
             <div class="works-panel">
                 <h3 class="works-title" id="workTitle">Плакат 1</h3>
                 <div class="works-price" id="workPrice">5 000 ₽</div>
                 <div class="slider-dots" id="sliderDots"></div>
             </div>
             
-            <!-- ОКОШКО С ПОСТЕРАМИ -->
             <div class="works-window" id="worksSlider">
                 <div class="works-slide active">
                     <img src="плакат 1 (2).png" alt="Плакат 1">
@@ -339,13 +423,24 @@
             </div>
         </section>
 
-        <!-- ЭКРАН 3 -->
+        <!-- ЭКРАН 3 - КОНТАКТЫ -->
         <section class="section section-3" id="section3">
-            <div style="max-width: 800px; text-align: center;">
-                <h2 style="font-family: 'Chair406', sans-serif; font-size: clamp(32px, 5vw, 48px); margin-bottom: 16px;">Контакты</h2>
-                <p style="font-family: 'Chair406', sans-serif; font-size: clamp(16px, 2.4vw, 20px); line-height: 1.5; opacity: 0.9;">
-                    Здесь контакты или форма обратной связи.
-                </p>
+            <div class="contacts-container">
+                <h2 class="contacts-title">Связаться со мной</h2>
+                
+                <div class="contacts-list">
+                    <div class="contact-item">
+                        📱 <strong>+7 (922) 953-76-00</strong>
+                    </div>
+                    <div class="contact-item">
+                        💌 <strong>rudakovskayasx@gmail.com</strong>
+                    </div>
+                    <div class="contact-item">
+                        ✈️ <strong>@ssrwqf</strong>
+                    </div>
+                </div>
+                
+                <div class="thanks-text">thanks u for watching</div>
             </div>
         </section>
     </div>
